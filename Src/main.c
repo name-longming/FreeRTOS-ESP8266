@@ -202,73 +202,7 @@ int main(void)
 	HMISendstart();
 	HMISends("page0.t0.txt=\"00：00：00\"");
 	HMISendb(0xff);
-	
-	ESP8266_Init();
-
 	HAL_UART_Receive_IT(&huart2, (uint8_t *)&aRxBuffer2, 1);
-	command(TX_Data);		//发送指令
-	
-	HAL_Delay(10000);
-
-	
-	json = cJSON_Parse((const char *) my_re_buf );
-	Array_obj1=cJSON_GetObjectItem(json,"results");
-	
-	int size=cJSON_GetArraySize(Array_obj1);
-	printf("\n%d",size);
-	
-	if(json == NULL)
-    printf("\njson fmt error:%s\n.", cJSON_GetErrorPtr());
-	else
-	{
-		Array=cJSON_GetArrayItem(Array_obj1,0);
-		Array_obj2=cJSON_GetObjectItem(Array,"now");
-		Array_obj3=cJSON_GetObjectItem(Array_obj2,"code");
-		HAL_Delay(1000);
-		Array_obj4=cJSON_GetObjectItem(Array_obj2,"temperature");
-		printf("n\r%s\n\r",Array_obj3->valuestring);
-		printf("n\r%s\n\r",Array_obj4->valuestring);
-		strcpy(Recive,Array_obj3->valuestring);
-		strcpy(Recive2,Array_obj4->valuestring);
-	
-		sprintf(Commend2,"page0.t4.txt=\"%s\"",Recive2);
-		HMISends(Commend2);
-		HMISendb(0xff);
-		memset(Recive2,0x00,sizeof(Recive2)); //清空数组
-		
-		if(Recive[0]==1&&(Recive[1]=='3'||Recive[1]=='4'||Recive[1]=='5'))
-		{
-			printf("\n天气：雨\n");
-			HMISends("page0.t1.txt=\"雨\"");
-			HMISendb(0xff);	
-		}
-		
-		else if(Recive[0]=='0'||Recive[0]=='1')
-		{	
-			printf("\n天气：晴\n");
-			HMISends("page0.t1.txt=\"晴\"");
-			HMISendb(0xff);
-		}
-		else if(Recive[0]=='4'||Recive[0]=='5'||Recive[0]=='6')
-		{	
-			printf("\n天气：多云\n");
-			HMISends("page0.t1.txt=\"多云\"");
-			HMISendb(0xff);
-		}
-		else if(Recive[0]=='9')
-		{
-			printf("\n天气：阴\n");
-			HMISends("page0.t1.txt=\"阴\"");
-			HMISendb(0xff);
-		}
-		Recive[0]='x';
-		Recive[1]='x';
-	}
-	memset(my_re_buf,0x00,sizeof(my_re_buf));
-	pt=0;
-	
-	cJSON_free(my_re_buf);
-	cJSON_Delete(json);
 	
   /* USER CODE END 2 */
   /* Call init function for freertos objects (in freertos.c) */
