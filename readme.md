@@ -15,3 +15,10 @@ stm32F407，淘晶驰串口屏，ESP8266；
 ## 实现效果
 
 ![实现效果](https://img-blog.csdnimg.cn/20200625171702401.JPG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25hbWVfbG9uZ21pbmc=,size_16,color_FFFFFF,t_70)
+
+## 更新日志
+
+| 2020.6.27     | 修复了开机启动慢的问题，加快了开机速度           |
+| ------------- | ------------------------------------------------ |
+| **2020.6.26** | **具备天气和气温实时检测系统并附加一个时间系统** |
+
